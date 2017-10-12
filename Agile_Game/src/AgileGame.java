@@ -4,11 +4,34 @@ import java.awt.*;
 public class AgileGame {
 	
 	//game variables
-	String gameString = "Agile Game";
-	int gameWidth = 1000;
-	int gameHeight = 1000;
-	static boolean gameStatus = true;
-	JFrame frame = new JFrame(gameString);
+	String gameString;
+	int gameWidth;
+	int gameHeight;
+	static boolean gameStatus;
+	JFrame frame;
+    Dice dice;
+    Deck deck;
+    
+    public AgileGame() {
+        gameString = "Agile Game";
+        gameWidth = 1000;
+        gameHeight = 1000;
+        gameStatus = true;
+        frame = new JFrame(gameString);
+        dice = new Dice();
+    }
+    
+    public void rollDice() {
+        int[] diceRolls = dice.rollDice();
+        // TODO: Display graphics for each die, getting upward facing value from diceRolls
+    }
+    
+    public void drawCard() {
+        Card card = deck.draw();
+        int value = card.getValue();
+        int storyPoints = card.getStoryPoints();
+        // TODO: Display graphics for card, using value and storyPoints to populate numbers
+    }
 	
 	
 	private void initializeGUI() {
@@ -29,6 +52,7 @@ public class AgileGame {
 			 * 1. process input
 			 * 2. update game state
 			 * 3. render (update graphics)
+             * (Use calls to drawCard and rollDice)
 			 */
 			
 		}
