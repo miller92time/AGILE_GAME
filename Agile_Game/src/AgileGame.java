@@ -26,10 +26,16 @@ public class AgileGame {
         // TODO: Display graphics for each die, getting upward facing value from diceRolls
     }
     
-    public void drawCard() {
-        Card card = deck.draw();
-        int value = card.getValue();
-        int storyPoints = card.getStoryPoints();
+    public void addComponent(JComponent c) {
+    	frame.add(c);
+    	//frame.revalidate();
+    	//frame.repaint();
+    }
+    
+    public void drawComponent() {
+    	frame.revalidate();
+    	frame.repaint();
+        
         // TODO: Display graphics for card, using value and storyPoints to populate numbers
     }
 	
@@ -38,12 +44,18 @@ public class AgileGame {
 		//for initializing the initial gui
 		frame.setSize(gameWidth, gameHeight);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		//Card card = new Card();
+		//frame.add(card);
 		frame.setVisible(true);
 	}
 
 	public static void main(String[] args) {
 		AgileGame game = new AgileGame();
 		game.initializeGUI();
+		Card card = new Card();
+		game.addComponent(card);
+		game.drawComponent();
+		
 		
 		//game loop
 		while(gameStatus) {
