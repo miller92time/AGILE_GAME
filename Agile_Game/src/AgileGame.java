@@ -44,8 +44,6 @@ public class AgileGame {
 		//for initializing the initial gui
 		frame.setSize(gameWidth, gameHeight);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		//Card card = new Card();
-		//frame.add(card);
 		frame.setVisible(true);
 	}
 

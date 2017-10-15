@@ -1,6 +1,8 @@
+import java.awt.Graphics;
 import java.util.LinkedList;
+import javax.swing.JComponent;
 
-public class Deck {
+public class Deck extends JComponent {
     private LinkedList<Card> cards;
     
     public Deck() {
@@ -23,4 +25,10 @@ public class Deck {
         cards.add(card);
         return cards.remove();
     }
+    
+    public void paintComponent(Graphics g) {
+    	super.paintComponent(g);
+    //	g.drawImage(image, 50, 50, null);
+    }
+    
 }

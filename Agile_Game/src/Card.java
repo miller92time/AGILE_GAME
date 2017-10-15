@@ -38,7 +38,6 @@ public class Card extends JComponent{
     public void paintComponent(Graphics g) {
     	super.paintComponent(g);
     	g.drawImage(image, 50, 50, null);
-    	//g.drawRect(20, 10, 100, 60);
     }
     
     public int getStoryPoints() {
