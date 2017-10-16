@@ -19,13 +19,6 @@ public class Die extends JPanel{
     	
     	this.xPos = x;
     	this.yPos = y;
-    	/* if we use an image
-    	try {
-    		image = ImageIO.read(new File("src/BlankCard.jpg"));
-    	} catch (IOException ex) {
-    		ex.printStackTrace();
-    	}
-    	*/
         value = 1;
         rand = new Random();
     }
@@ -42,6 +35,5 @@ public class Die extends JPanel{
     	g.setFont(new Font("TimesRoman" , Font.PLAIN,18));
     	g.drawString(display, xPos + 35, yPos +35);
     	g.drawRect(xPos, yPos, 75, 75);
-    	//g.drawImage(image, 50, 50, null);
     }
 }

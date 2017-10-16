@@ -12,6 +12,11 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 
 public class Card extends JComponent{
+	
+	//need to add listener
+	//need to add button
+	
+	
     private int value;
     private int storyPoints;
     private int xPos;
@@ -19,6 +24,7 @@ public class Card extends JComponent{
     private Random rand;
     private BufferedImage image;
     private InputStream str;
+    private String imageStr = "BlankCard.jpg";
     
     public Card(int x , int y) {
     	this.xPos = x;
@@ -28,8 +34,9 @@ public class Card extends JComponent{
         value = rand.nextInt(20) + 1;
         // Story points is a random number between 1 and 12
         storyPoints = rand.nextInt(12) + 1;
-        str =ClassLoader.getSystemResourceAsStream("BlankCard.jpg");
-        Card.class.getResource("src/BlankCard.jpg");
+        
+        //load image
+        str =ClassLoader.getSystemResourceAsStream(imageStr);
         try {
     		image = ImageIO.read(str);
     	} catch (IOException ex) {
@@ -51,11 +58,15 @@ public class Card extends JComponent{
     
     public void paintComponent(Graphics g) {
     	super.paintComponent(g);
-    	g.drawImage(image, xPos, yPos, null);
-    	g.setFont(new Font("TimesRoman" , Font.PLAIN,18));
+    	
+    	//story display strings
     	String displaySP = "Story Points: " + storyPoints;
-    	g.drawString(displaySP, xPos + 15, yPos + 50);
     	String displayVal = "Value: " + value;
+    	
+    	//actually drawing the cards and stuff yo
+    	g.setFont(new Font("TimesRoman" , Font.PLAIN,18));
+    	g.drawImage(image, xPos, yPos, null);
+    	g.drawString(displaySP, xPos + 15, yPos + 50);
     	g.drawString(displayVal, xPos + 15, yPos + 100);
     }
     

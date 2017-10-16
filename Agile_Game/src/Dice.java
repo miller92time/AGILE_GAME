@@ -2,6 +2,8 @@ import java.awt.Graphics;
 
 import javax.swing.JComponent;
 
+
+//not sure if needed
 public class Dice extends JComponent{
     private Die die1;
     private Die die2;
