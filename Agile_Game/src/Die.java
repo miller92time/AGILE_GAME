@@ -1,10 +1,30 @@
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Random;
 
-public class Die {
+import javax.imageio.ImageIO;
+import javax.swing.JPanel;
+
+public class Die extends JPanel{
     private int value;
     private Random rand;
+    private BufferedImage image;
+    private int xPos;
+    private int yPos;
     
-    public Die() {
+    public Die(int x, int y) {
+    	
+    	x = this.xPos;
+    	y = this.yPos;
+    	/* if we use an image
+    	try {
+    		image = ImageIO.read(new File("src/BlankCard.jpg"));
+    	} catch (IOException ex) {
+    		ex.printStackTrace();
+    	}
+    	*/
         value = 1;
         rand = new Random();
     }
@@ -13,5 +33,11 @@ public class Die {
         // Die values range from 1 to 6
         value = rand.nextInt(6) + 1;
         return value;
+    }
+    
+    public void paintComponent(Graphics g) {
+    	super.paintComponent(g);
+    	g.drawRect(xPos, yPos, 50, 50);
+    	//g.drawImage(image, 50, 50, null);
     }
 }

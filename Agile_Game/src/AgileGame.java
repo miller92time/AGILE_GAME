@@ -50,10 +50,19 @@ public class AgileGame {
 	public static void main(String[] args) {
 		AgileGame game = new AgileGame();
 		game.initializeGUI();
-		Card card = new Card();
+		Deck deck = new Deck();
+		Card card = new Card(50,50);
 		game.addComponent(card);
 		game.drawComponent();
+		Card card2 = deck.draw();
+		card2.setY(500);
+		card2.setX(500);
+		game.addComponent(card2);
+		game.drawComponent();
+		Die die = new Die(900,900);
 		
+		game.addComponent(die);
+		game.drawComponent();
 		
 		//game loop
 		while(gameStatus) {

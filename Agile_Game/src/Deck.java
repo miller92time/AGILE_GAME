@@ -6,9 +6,10 @@ public class Deck extends JComponent {
     private LinkedList<Card> cards;
     
     public Deck() {
+    	cards = new LinkedList<Card>();
         // There are 50 cards in a deck
         for (int i = 0; i < 50; i++) {
-            Card card = new Card();
+            Card card = new Card(0,0);
             cards.add(card);
         }
     }

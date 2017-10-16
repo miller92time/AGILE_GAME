@@ -7,8 +7,8 @@ public class Dice extends JComponent{
     private Die die2;
     
     public Dice() {
-        die1 = new Die();
-        die2 = new Die();
+        die1 = new Die(0,0);
+        die2 = new Die(0,0);
     }
     
     public int[] rollDice() {

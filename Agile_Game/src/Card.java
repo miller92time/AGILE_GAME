@@ -12,11 +12,14 @@ import javax.swing.JFrame;
 public class Card extends JComponent{
     private int value;
     private int storyPoints;
+    private int xPos;
+    private int yPos;
     private Random rand;
-    private Graphics cardG;
     private BufferedImage image;
     
-    public Card() {
+    public Card(int x , int y) {
+    	this.xPos = x;
+    	this.yPos = y;
         rand = new Random();
         // Value is a random number between 1 and 20
         value = rand.nextInt(20) + 1;
@@ -24,7 +27,6 @@ public class Card extends JComponent{
         storyPoints = rand.nextInt(12) + 1;
         try {
     		image = ImageIO.read(new File("src/BlankCard.jpg"));
-    		int v = 0;
     	} catch (IOException ex) {
     		ex.printStackTrace();
     	}
@@ -34,10 +36,19 @@ public class Card extends JComponent{
         return value;
     }
     
+    public void setX(int x) {
+    	this.xPos = x;
+    }
+    
+    public void setY(int y) {
+    	this.yPos = y;
+    }
     
     public void paintComponent(Graphics g) {
     	super.paintComponent(g);
-    	g.drawImage(image, 50, 50, null);
+    	g.drawImage(image, xPos, yPos, null);
+    	String display = "Story Points: " + storyPoints;
+    	g.drawString(display, xPos + 20, yPos + 50);
     }
     
     public int getStoryPoints() {
