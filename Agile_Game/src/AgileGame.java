@@ -14,8 +14,8 @@ public class AgileGame {
     
     public AgileGame() {
         gameString = "Agile Game";
-        gameWidth = 1000;
-        gameHeight = 1000;
+        gameWidth = 1280;
+        gameHeight = 1024;
         gameStatus = true;
         frame = new JFrame(gameString);
         dice = new Dice();
@@ -55,11 +55,11 @@ public class AgileGame {
 		game.addComponent(card);
 		game.drawComponent();
 		Card card2 = deck.draw();
-		card2.setY(500);
+		card2.setY(50);
 		card2.setX(500);
 		game.addComponent(card2);
 		game.drawComponent();
-		Die die = new Die(900,900);
+		Die die = new Die(300,300);
 		
 		game.addComponent(die);
 		game.drawComponent();

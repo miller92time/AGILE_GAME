@@ -1,3 +1,4 @@
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -47,8 +48,11 @@ public class Card extends JComponent{
     public void paintComponent(Graphics g) {
     	super.paintComponent(g);
     	g.drawImage(image, xPos, yPos, null);
-    	String display = "Story Points: " + storyPoints;
-    	g.drawString(display, xPos + 20, yPos + 50);
+    	g.setFont(new Font("TimesRoman" , Font.PLAIN,18));
+    	String displaySP = "Story Points: " + storyPoints;
+    	g.drawString(displaySP, xPos + 15, yPos + 50);
+    	String displayVal = "Value: " + value;
+    	g.drawString(displayVal, xPos + 15, yPos + 100);
     }
     
     public int getStoryPoints() {

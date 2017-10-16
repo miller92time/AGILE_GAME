@@ -1,3 +1,4 @@
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -16,8 +17,8 @@ public class Die extends JPanel{
     
     public Die(int x, int y) {
     	
-    	x = this.xPos;
-    	y = this.yPos;
+    	this.xPos = x;
+    	this.yPos = y;
     	/* if we use an image
     	try {
     		image = ImageIO.read(new File("src/BlankCard.jpg"));
@@ -37,7 +38,10 @@ public class Die extends JPanel{
     
     public void paintComponent(Graphics g) {
     	super.paintComponent(g);
-    	g.drawRect(xPos, yPos, 50, 50);
+    	String display = "" + value;
+    	g.setFont(new Font("TimesRoman" , Font.PLAIN,18));
+    	g.drawString(display, xPos + 35, yPos +35);
+    	g.drawRect(xPos, yPos, 75, 75);
     	//g.drawImage(image, 50, 50, null);
     }
 }
