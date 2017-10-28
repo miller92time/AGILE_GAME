@@ -18,8 +18,5 @@
         </jar>
     </target>
 
-    <target name="run">
-        <java jar="build/jar/Agile_Game.jar" fork="true"/>
-    </target>
-
+    
 </project>
