@@ -1,57 +1,171 @@
-<?xml version="1.0"?>   
-<project name="java-junit-template-project" default="test" basedir=".">
-  <property name="main.build.dir" value="build/main" />  
-  <property name="main.src.dir" value="src" />
-  <property name="test.build.dir" value="build/test" />
-  <property name="test.src.dir" value="test" />
+<project name="JavaDeb Task" basedir="." default="dist">
 
-  <path id="classpath.base" />
+    <path id="classpath">
+        <pathelement location="build/classes"/>
+        <fileset dir="lib" includes="*.jar"/>
+    </path>
 
-  <path id="classpath.test">
-    <pathelement location="lib/junit-4.11.jar" />
-    <pathelement location="lib/hamcrest-core-1.3.jar" />
-    <pathelement location="${main.build.dir}"/>
-    <path refid="classpath.base" />
-  </path>
+    <target name="compile" description="Compile Java source code">
+        <mkdir dir="build/classes"/>
+        <javac
+            srcdir="src"
+            destdir="build/classes"
+            classpathref="classpath"
+            target="1.4"
+            source="1.4"
+            debug="yes"
+        />
+        <copy todir="build/classes">
+            <fileset dir="src" includes="**/*.properties"/>
+            <fileset dir="src" includes="**/*.xml"/>
+        </copy>
+    </target>
 
-  <target name="test" depends="run, clean" />
+    <target name="antDoc" depends="compile" description="Generate Ant documentation">
+        <taskdef name="antTasksDocHtml" classname="net.sf.fikin.ant.AntTasksDocHtmlDocletTask" classpath="lib/fikin-ant-1.7.3.jar"/>
+        <taskdef name="antTasksDocText" classname="net.sf.fikin.ant.AntTasksDocTextDocletTask" classpath="lib/fikin-ant-1.7.3.jar"/>
+        <tstamp />
 
-  <target name="compile">
-    <mkdir dir="${main.build.dir}"/>
-    <javac srcdir="${main.src.dir}" destdir="${main.build.dir}" includeantruntime="false">
-      <classpath refid="classpath.base"/>
-    </javac>
-  </target>
+        <mkdir dir="build/doc"/>
 
-  <target name="build" depends="compile">
-    <mkdir dir="${test.build.dir}"/>
-    <javac srcdir="${test.src.dir}" destdir="${test.build.dir}" includeantruntime="false">
-        <classpath refid="classpath.test"/>
-    </javac>
-    <echo message="Build done" />
-  </target>
-   
-  <!-- Test and build all files  -->
-  <!-- To run this: use "ant" (default) or "ant run" -->
-  <target name="run" depends="build">
-    <junit printsummary="on" haltonfailure="yes">
-        <classpath>
-          <path refid="classpath.test" />
-          <pathelement location="${test.build.dir}"/>
-        </classpath>
-        <formatter type="brief" usefile="false" />
-        <batchtest>
-            <fileset dir="${test.src.dir}" includes="**/*Test*.java" />
-        </batchtest>
-    </junit>
-  </target>
-   
-  <!-- delete all class files -->
-  <!-- To run this: use "ant clean" -->
-  <target name="clean">
-    <delete>
-        <fileset dir="${basedir}" includes="**/*.class" />
-    </delete>
-    <echo message="clean done" />
-  </target>
+        <antTasksDocHtml file="build/doc/ant-deb-tasks.html" classpathref="classpath" failonerror="yes">
+            <packageset dir="src" defaultexcludes="yes"/>
+            <param name="-J-DDSTAMP=${DSTAMP}" />
+            <param name="-J-DTSTAMP=${TSTAMP}" />
+            <param name="-J-Dheader=Ant Deb Tasks"/>
+        </antTasksDocHtml>
+        <antTasksDocText file="build/doc/ant-deb-tasks.txt" classpathref="classpath" failonerror="yes">
+            <packageset dir="src"    defaultexcludes="yes"/>
+            <param name="-J-DDSTAMP=${DSTAMP}" />
+            <param name="-J-DTSTAMP=${TSTAMP}" />
+            <param name="-J-Dheader=Ant Deb Tasks"/>
+        </antTasksDocText>
+    </target>
+
+    <!-- - - - - - - - - - - - - - - - - - 
+          private target: jar                      
+         - - - - - - - - - - - - - - - - - -->
+	<property name="antdeb.name" value="ant-deb"/>
+    <target name="jar" depends="compile">
+    	<description>Package compiled classes into a jar</description>
+        <jar
+            basedir="build/classes"
+            destfile="build/${antdeb.name}.jar"/>
+    </target>
+	
+	<!-- - - - - - - - - - - - - - - - - - 
+          private target: examples                      
+         - - - - - - - - - - - - - - - - - -->
+    <property name="examples.name" value="examples"/>
+    <property name="targz" value="tar.gz"/>
+	<target name="examples">
+    	<description>create a zip with the examples</description>
+        <mkdir dir="build"/>
+		<tar destfile="build/${examples.name}.${targz}" compression="gzip">
+			<tarfileset dir="samples">
+                <exclude name="**/build"/>
+                <exclude name="**/build/**"/>
+                <exclude name="**/dist"/>
+                <exclude name="**/dist/**"/>
+                <exclude name="**/download/*"/>
+                <exclude name="**/.ant-targets-build.xml"/>
+            </tarfileset>
+		</tar>
+    </target>
+
+	<!-- ================================= 
+          public target: release-dist
+         ================================= -->
+    <target name="release-dist" depends="dist" description="Release all distribution files">
+        <input addproperty="dist.version.number" message="Please enter a version number for your distribution" defaultvalue="0.0.1" />
+    	<move file="dist/${examples.name}.${targz}" tofile="dist/${examples.name}-${dist.version.number}.${targz}" />
+    	<move file="dist/${antdeb.name}.jar" tofile="dist/${antdeb.name}-${dist.version.number}.jar"/>
+    	<antcall target="createdeb" />
+    </target>
+	
+    <!-- ================================= 
+          public target: dist              
+         ================================= -->
+    <target name="dist" depends="clean, jar, examples" description="Generate and package all distributables">
+        <mkdir dir="dist"/>
+        <copy file="build/${antdeb.name}.jar" todir="dist"/>
+    	<copy file="build/${examples.name}.${targz}" todir="dist"/>
+    </target>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          private target: createdeb                      
+         - - - - - - - - - - - - - - - - - -->
+    <target name="createdeb" depends="define_tasks">
+    	<description>create a debian package of the ant deb task</description>
+    	<property name="package.name" value="ant-deb-task"/>
+        <deb
+            todir="dist"
+            package="${package.name}"
+            version="${dist.version.number}"
+            section="devel"
+            depends="sun-java5-jre | sun-java6-jre, ant">
+            <version upstream="${dist.version.number}"/>
+        	<maintainer name="Darko Palic" email="darko.palic@googlemail.com"/>
+            <description synopsis="Optional Ant task for creating deb-packages">
+                This optional ant task provides traget to create desktop entries and debian packages (.deb files) of a java project.
+            </description>
+            <tarfileset dir="${basedir}/doc" prefix="usr/share/doc/${package.name}">
+                <include name="**"/>
+            </tarfileset>
+            <tarfileset dir="${basedir}" prefix="usr/share/doc/${package.name}">
+            	<include name="LICENSE"/>
+            </tarfileset>
+            <tarfileset dir="${basedir}/dist" prefix="usr/share/${package.name}">
+                <include name="*.jar"/>
+            </tarfileset>        	
+        </deb>
+    </target>
+	
+    <target name="define_tasks" depends="compile">
+        <taskdef name="desktopEntry" classname="com.googlecode.ant_deb_task.DesktopEntry" classpathref="classpath"/>
+        <taskdef name="deb" classname="com.googlecode.ant_deb_task.Deb" classpathref="classpath"/>
+    </target>
+
+    <target name="testDesktopEntry" depends="define_tasks" description="Test the DesktopEntry task">
+        <mkdir dir="build/test"/>
+        <desktopEntry
+            toFile="build/test/Test.desktop"
+            name="Some Name"
+            exec="/usr/bin/test"
+            categories="Office;Database"
+            onlyshowin="GNOME;KDE"
+        >
+            <name lang="ro" value="Un nume"/>
+            <name lang="hu" country="hu" value="Edgy nev"/>
+            <genericname value="The Generic Name"/>
+        </desktopEntry>
+    </target>
+
+    <target name="testDeb" depends="define_tasks" description="Test the Deb task">
+        <mkdir dir="build/test"/>
+        <deb
+            todir="build/test"
+            package="test"
+            version="1.1"
+            section="devel"
+            depends="sun-java5-jre | sun-java6-jre">
+            <version epoch="2" upstream="1.1" debian="test1"/>
+            <maintainer name="John Tester" email="jtester@example.com"/>
+            <description synopsis="Short Description">
+
+                Long description
+
+                on multiple lines
+                
+            </description>
+            <tarfileset dir="." includes="src/**, lib/**"/>
+        </deb>
+
+    </target>
+
+    <target name="clean" description="Clean work folders">
+        <delete dir="build" verbose="true"/>
+        <delete dir="dist" verbose="true"/>
+    </target>
+
 </project>
