@@ -105,28 +105,6 @@
         </junitreport>
     </target>
 
-    <taskdef resource="testngtasks" classpathref="testng.class.path"/>
-    <target name="testng-test" description="run all testng tests" depends="compile">
-        <!-- Debug output
-                <property name="test.class.path" refid="test.class.path"/>
-                <echo message="${test.class.path}"/>
-        -->
-        <testng classpathref="test.class.path" outputDir="${testng.out}" haltOnFailure="${haltonfailure}" verbose="2" parallel="methods" threadcount="50">
-            <classfileset dir="${out}/test/${ant.project.name}" includes="**/*.class"/>
-        </testng>
-    </target>
-
-    <target name="exploded" description="create exploded deployment" depends="testng-test">
-        <copy todir="${exploded.classes}">
-            <fileset dir="${production.classes}"/>
-        </copy>
-        <copy todir="${exploded.lib}">
-            <fileset dir="${production.lib}"/>
-        </copy>
-    </target>
-
-    <target name="package" description="create package file" depends="exploded">
-        <jar destfile="${out}/${ant.project.name}.jar" basedir="${production.classes}" includes="**/*.class"/>
-    </target>
+    
 
 </project>
