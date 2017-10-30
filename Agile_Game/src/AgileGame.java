@@ -11,12 +11,20 @@ public class AgileGame {
 	JFrame frame;
 	Dice dice;
 	Deck deck;
+	Deck team1Deck;
+	Deck team2Deck;
+	Team team1;
+	Team team2;
 
 	public AgileGame() {
 		
 		gameStatus = true;
 		frame = new JFrame(gameString);
 		dice = new Dice();
+		team1Deck = new Deck();
+		team2Deck = new Deck();
+		team1 = new Team(team1Deck);
+		team2 = new Team(team2Deck);
 	}
 
 
@@ -30,7 +38,44 @@ public class AgileGame {
 		//Refreshes and draws all current components in the game to the screen
 		
 		frame.revalidate();
+		frame.setBackground(Color.WHITE);
 		frame.repaint();
+		
+	}
+	
+	
+	public void checkGameStatus() {
+		//game logic here
+		
+		//on click events
+		
+		
+		checkGameOver();
+		
+		
+		
+	}
+	
+	public void checkGameOver() {
+		//Checks for game over and exits game loop
+		
+		//game over logic
+		
+		//if - exit button then exit
+		
+		if(team1.getScore() >= 100) team1.setWin();
+		else if (team2.getScore() >= 100) team2.setWin();
+		
+		if(team1.getWin() || team2.getWin()) {
+			frame.removeAll();
+			//Graphics g = frame.getGraphics();
+			//frame.add(g);
+			gameStatus = false;
+		}
+			
+		
+		
+		
 		
 	}
 
@@ -38,9 +83,12 @@ public class AgileGame {
 	private void initializeGUI() {
 		//for initializing the initial gui
 		frame.setSize(gameWidth, gameHeight);
+		frame.setBackground(Color.WHITE);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 	}
+	
+	
 
 	public static void main(String[] args) {
 
@@ -57,6 +105,10 @@ public class AgileGame {
 		game.addComponent(card2);
 		game.drawComponents();
 		Die die = new Die(300,300);
+		
+		
+		game.team1.drawCards();
+		
 
 
 		//need to add button for rolls
@@ -67,6 +119,8 @@ public class AgileGame {
 
 		//game loop
 		while(gameStatus) {
+			
+			//long currentTime = System.nanoTime();
 			/*
 			 * game loop
 			 * 1. process input
@@ -75,8 +129,15 @@ public class AgileGame {
 			 * game.drawComponent();
 			 * (Use calls to drawCard and rollDice)
 			 */
+			
+			
+			game.checkGameStatus();
+			game.drawComponents();
+			game.team1.addToScore(101);
+			game.frame.removeAll();
 
 		}
+		
 
 	}
 
