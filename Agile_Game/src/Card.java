@@ -25,7 +25,8 @@ public class Card extends JComponent{
     private BufferedImage image;
     private InputStream str;
     private String imageStr = "BlankCard.jpg";
-    
+    private int sprint;
+    private int team;
     public Card(int x , int y) {
     	this.xPos = x;
     	this.yPos = y;
@@ -73,7 +74,20 @@ public class Card extends JComponent{
     public int getStoryPoints() {
         return storyPoints;
     }
-    
+    public int setSprint(){
+    	return sprint;
+    }
+    public int getSprint()
+    {
+    	return sprint;
+    }
+    public int setTeam(){
+    	return team;
+    }
+    public int getTeam()
+    {
+    	return team;
+    }
     public int cardFailed() {
         storyPoints -= 1;
         return storyPoints;
