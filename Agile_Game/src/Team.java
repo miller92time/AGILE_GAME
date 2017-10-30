@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Team {
     
@@ -48,5 +50,13 @@ public class Team {
         }
     }
     
-    // TODO: Jenny - Add method to display the hand
+    // Add method to display the hand
+    public void Display()
+    {
+    	Collections.sort(hand, new Comparator<Card>(){
+    		public int compare(Card c1, Card c2){
+    			return c1.getValue() > c2.getValue() ? -1 :(c1.getValue() < c2.getValue() ? 1 : 0);//descending  by card value
+    		}
+    	});
+    }
 }
