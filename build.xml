@@ -14,7 +14,9 @@
         <pathelement location="forms-1.3.0.jar"/>
     </path>
 
-<target depends="-do-init" name="init"/> 
+<target name="init">
+       
+    </target>
     <target name="clean">
         <delete dir="bin"/>
     </target>
