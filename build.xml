@@ -13,7 +13,9 @@
         <pathelement location="bin"/>
         <pathelement location="forms-1.3.0.jar"/>
     </path>
- 
+ <import file="nbproject/profiler-build-impl.xml"/> 
+<import file="nbproject/build-impl.xml"/> 
+<target depends="-do-init" name="init"/> 
     <target name="clean">
         <delete dir="bin"/>
     </target>
