@@ -19,7 +19,6 @@
             <fileset dir="src">
                 <exclude name="**/*.launch"/>
                 <exclude name="**/*.java"/>
-                <exclude name="Sprint.java"/>
             </fileset>
         </copy>
     </target>
