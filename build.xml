@@ -56,11 +56,6 @@
             <classpath refid="Agile_Game.classpath"/>
         </java>
     </target>
-    <target name="AgileGameDemo">
-        <java classname="AgileGameDemo" failonerror="true" fork="yes">
-            <classpath refid="Agile_Game.classpath"/>
-        </java>
-    </target>
     <target name="MainGame">
         <java classname="MainGame" failonerror="true" fork="yes">
             <classpath refid="Agile_Game.classpath"/>
