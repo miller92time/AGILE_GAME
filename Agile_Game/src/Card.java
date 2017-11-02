@@ -88,8 +88,7 @@ public class Card extends JComponent{
     {
     	return team;
     }
-    public int cardFailed() {
+    public void cardFailed() {
         storyPoints -= 1;
-        return storyPoints;
     }
 }

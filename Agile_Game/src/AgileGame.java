@@ -23,8 +23,8 @@ public class AgileGame {
 		dice = new Dice();
 		team1Deck = new Deck();
 		team2Deck = new Deck();
-		team1 = new Team(team1Deck);
-		team2 = new Team(team2Deck);
+		team1 = new Team(team1Deck, dice);
+		team2 = new Team(team2Deck, dice);
 	}
 
 
