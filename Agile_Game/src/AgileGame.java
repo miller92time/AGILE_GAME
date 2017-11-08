@@ -11,8 +11,6 @@ public class AgileGame {
 	JFrame frame;
 	Dice dice;
 	Deck deck;
-	Deck team1Deck;
-	Deck team2Deck;
 	Team team1;
 	Team team2;
 
@@ -21,10 +19,9 @@ public class AgileGame {
 		gameStatus = true;
 		frame = new JFrame(gameString);
 		dice = new Dice();
-		team1Deck = new Deck();
-		team2Deck = new Deck();
-		team1 = new Team(team1Deck, dice);
-		team2 = new Team(team2Deck, dice);
+        deck = new Deck();
+		team1 = new Team(deck, dice);
+		team2 = new Team(deck, dice);
 	}
 
 
