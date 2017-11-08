@@ -27,6 +27,10 @@ public class Deck extends JComponent {
         return cards.remove();
     }
     
+    public boolean containsCard(Card card) {
+        return cards.contains(card);
+    }
+    
     public void paintComponent(Graphics g) {
     	super.paintComponent(g);
     //	g.drawImage(image, 50, 50, null);

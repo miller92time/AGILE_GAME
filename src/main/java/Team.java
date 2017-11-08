@@ -52,10 +52,17 @@ public class Team {
         }
     }
     
+    // Allows team to remove a card from the hand
+    public Card removeCard(int position) {
+        Card card = hand.get(position);
+        hand.remove(position);
+        return card;
+    }
+    
     // Allows team's product owner to trade in a card for a new one from the deck
     public void swap(Card card) {
         hand.add(deck.swapCard(card));
-     
+        hand.remove(card);
     }
     
     // Takes the card the player chose for their turn and completes their dice roll
