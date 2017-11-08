@@ -124,7 +124,7 @@ public class AgileGameDemo {
 		btnStartGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frmAgileGame.dispose();
-				MainGame.main(null);
+				AgileGame.main(null);
 			}
 		});
 		btnStartGame.setBounds(327, 331, 200, 50);
