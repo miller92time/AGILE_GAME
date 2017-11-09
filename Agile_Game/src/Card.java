@@ -53,6 +53,14 @@ public class Card extends JComponent{
     	this.xPos = x;
     }
     
+    public int getX() {
+    	return xPos;
+    }
+    
+    public int getY() {
+    	return yPos;
+    }
+    
     public void setY(int y) {
     	this.yPos = y;
     }
