@@ -35,14 +35,17 @@ public class Card extends JComponent{
         value = rand.nextInt(20) + 1;
         // Story points is a random number between 1 and 12
         storyPoints = rand.nextInt(12) + 1;
-        
+    }
+    
+    // Decoupled this logic from the constructor
+    public void setCardImage() {
         //load image
         str =ClassLoader.getSystemResourceAsStream(imageStr);
         try {
-    		image = ImageIO.read(str);
-    	} catch (IOException ex) {
-    		ex.printStackTrace();
-    	}
+            image = ImageIO.read(str);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
     
     public int getValue() {
@@ -67,6 +70,8 @@ public class Card extends JComponent{
     
     public void paintComponent(Graphics g) {
     	super.paintComponent(g);
+        
+        setCardImage();
     	
     	//story display strings
     	String displaySP = "Story Points: " + storyPoints;
@@ -96,8 +101,7 @@ public class Card extends JComponent{
     {
     	return team;
     }
-    public int cardFailed() {
+    public void cardFailed() {
         storyPoints -= 1;
-        return storyPoints;
     }
 }

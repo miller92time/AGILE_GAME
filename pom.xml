@@ -5,6 +5,7 @@
     <artifactId>Agile_Game</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>Java Maven-based project </name>
+    <packaging>jar</packaging>
 
     <scm>
         <connection>scm:git:git@github.com:SonarSource/sq-com_example_java-maven-travis.git</connection>
@@ -16,7 +17,13 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.10</version>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>2.12.0</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

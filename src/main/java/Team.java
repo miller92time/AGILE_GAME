@@ -8,11 +8,13 @@ public class Team {
     private int numPlayers;
     private int score;
     private Deck deck;
+    private Dice dice;
     private boolean win = false;
     
     // Takes the game deck as input to the constructor so the team can draw cards
-    public Team(Deck deck) {
+    public Team(Deck deck, Dice dice) {
     	this.deck = deck;
+        this.dice = dice;
         hand = new ArrayList<Card>();
         numPlayers = 4; // Default is 4, can add ability to change it later
         score = 0;
@@ -47,6 +49,33 @@ public class Team {
     public void drawCards() {
         while (hand.size() < 10) {
             hand.add(deck.draw());
+        }
+    }
+    
+    // Allows team to remove a card from the hand
+    public Card removeCard(int position) {
+        Card card = hand.get(position);
+        hand.remove(position);
+        return card;
+    }
+    
+    // Allows team's product owner to trade in a card for a new one from the deck
+    public void swap(Card card) {
+        hand.add(deck.swapCard(card));
+        hand.remove(card);
+    }
+    
+    // Takes the card the player chose for their turn and completes their dice roll
+    public void playerTurn(Card card) {
+        int goal = card.getStoryPoints();
+        int[] diceRoll = dice.rollDice();
+        int result = diceRoll[0] + diceRoll[1];
+        if (result >= goal) {
+            hand.remove(card);
+            score += card.getValue();
+        } else {
+            card.cardFailed();
+            // TODO: Redraw card with updated value
         }
     }
     
