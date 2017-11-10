@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class AgileGame {
+public class AgileGame implements Runnable {
 
 	//game variables
 	final String gameString = "Agile Game";
@@ -87,7 +87,7 @@ public class AgileGame {
 	
 	
 
-	public static void main(String[] args) {
+	public void run() {
 
 		//initial dispay stuff
 		AgileGame game = new AgileGame();
@@ -132,7 +132,13 @@ public class AgileGame {
 			game.drawComponents();
 			game.team1.addToScore(101);
 			game.frame.removeAll();
-
+			
+			try {Thread.sleep(10);
+			
+			} catch (InterruptedException ex)
+			{
+				ex.printStackTrace();
+			}
 		}
 		
 
