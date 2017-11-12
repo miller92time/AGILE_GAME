@@ -22,6 +22,10 @@ public class AgileGame {
         deck = new Deck();
 		team1 = new Team(deck, dice);
 		team2 = new Team(deck, dice);
+		team1.setName(AgileGameDemo.team1name);
+		team1.setNumber(AgileGameDemo.team1player);
+		team2.setName(AgileGameDemo.team2name);
+		team2.setNumber(AgileGameDemo.team2player);
 	}
 
 
