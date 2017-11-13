@@ -8,8 +8,9 @@ public class AgileGame {
 	final int gameWidth = 1280;
 	final int gameHeight = 1024;
 	static boolean gameStatus;
+	
 	JFrame frame;
-	Dice dice;
+	RollDie rollDie;
 	Deck deck;
 	Team team1;
 	Team team2;
@@ -18,10 +19,11 @@ public class AgileGame {
 		
 		gameStatus = true;
 		frame = new JFrame(gameString);
-		dice = new Dice();
+		// dice = new Dice();
         deck = new Deck();
-		team1 = new Team(deck, dice);
-		team2 = new Team(deck, dice);
+        rollDie = new RollDie();
+        team1 = new Team(deck, rollDie); 
+        team2 = new Team(deck, rollDie); 
 	}
 
 
@@ -45,12 +47,9 @@ public class AgileGame {
 		//game logic here
 		
 		//on click events
-		
-		
+			
 		checkGameOver();
-		
-		
-		
+			
 	}
 	
 	public void checkGameOver() {
@@ -68,11 +67,7 @@ public class AgileGame {
 			//Graphics g = frame.getGraphics();
 			//frame.add(g);
 			gameStatus = false;
-		}
-			
-		
-		
-		
+		}	
 		
 	}
 
@@ -89,29 +84,32 @@ public class AgileGame {
 
 	public static void main(String[] args) {
 
-		//initial dispay stuff
+		//Initial Game Display
 		AgileGame game = new AgileGame();
 		game.initializeGUI();
+		
+		// Deck & Cards
 		Deck deck = new Deck();
 		Card card = new Card(50,50);
+		
 		game.addComponent(card);
 		game.drawComponents();
+		
 		Card card2 = deck.draw();
 		card2.setY(50);
 		card2.setX(500);
 		game.addComponent(card2);
 		game.drawComponents();
-		Die die = new Die(300,300);
 		
+		// Dice
+		RollDie rollDie = new RollDie(); 
+		game.addComponent(rollDie);
+		game.drawComponents();
 		
+		// Team 
 		game.team1.drawCards();
-		
 
-
-		//need to add button for rolls
-
-
-		game.addComponent(die);
+		//game.addComponent(die); 			// Add some component 
 		game.drawComponents();
 
 		//game loop
@@ -127,7 +125,6 @@ public class AgileGame {
 			 * (Use calls to drawCard and rollDice)
 			 */
 			
-			
 			game.checkGameStatus();
 			game.drawComponents();
 			game.team1.addToScore(101);
@@ -137,5 +134,6 @@ public class AgileGame {
 		
 
 	}
+	
 
 }
