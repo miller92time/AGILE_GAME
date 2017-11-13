@@ -1,4 +1,5 @@
 import javax.swing.*;
+
 import java.awt.*;
 
 public class AgileGame implements Runnable {
@@ -22,6 +23,10 @@ public class AgileGame implements Runnable {
         deck = new Deck();
 		team1 = new Team(deck, dice);
 		team2 = new Team(deck, dice);
+		team1.setName(AgileGameDemo.team1name);
+		team1.setNumber(AgileGameDemo.team1player);
+		team2.setName(AgileGameDemo.team2name);
+		team2.setNumber(AgileGameDemo.team2player);
 	}
 
 
@@ -83,15 +88,78 @@ public class AgileGame implements Runnable {
 		frame.setBackground(Color.WHITE);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setVisible(true);
+		frame.setLayout(null);
+		//
+		///
+		
 	}
 	
 	
+<<<<<<< HEAD
 
 	public void run() {
+=======
+	//
+	private final static JLabel t1lab = new JLabel("<html>Total<br>Value Points</html>");
+	public static void main(String[] args) {
+>>>>>>> e0529da7891d3a2512556b6c1f93202cc99e01a6
 
 		//initial dispay stuff
 		AgileGame game = new AgileGame();
 		game.initializeGUI();
+		/**
+		 * Initialize the contents of the frame.
+		 */
+		JPanel Team1Panel = new JPanel();
+		Team1Panel.setBackground(Color.LIGHT_GRAY);
+		Team1Panel.setBounds(0, 0, 430, 100);
+		game.addComponent(Team1Panel);
+		Team1Panel.setLayout(null);
+		t1lab.setFont(new Font("Tahoma", Font.BOLD, 24));
+		t1lab.setBounds(0, 0, 170, 100);
+		Team1Panel.add(t1lab);
+		
+		JLabel t1pointslab = new JLabel("60");
+		t1pointslab.setHorizontalAlignment(SwingConstants.CENTER);
+		t1pointslab.setFont(new Font("Tahoma", Font.BOLD, 24));
+		t1pointslab.setBounds(260, 0, 170, 100);
+		Team1Panel.add(t1pointslab);
+		
+		JPanel Team2Panel = new JPanel();
+		Team2Panel.setBackground(Color.LIGHT_GRAY);
+		Team2Panel.setBounds(828, 0, 430, 100);
+		game.addComponent(Team2Panel);
+		Team2Panel.setLayout(null);
+		
+		JLabel t2lab = new JLabel("<html>Total<br>Value Points</html>");
+		t2lab.setBounds(0, 0, 148, 100);
+		Team2Panel.add(t2lab);
+		t2lab.setFont(new Font("Tahoma", Font.BOLD, 24));
+		
+		JLabel t2pointslab = new JLabel("60");
+		t2pointslab.setHorizontalAlignment(SwingConstants.CENTER);
+		t2pointslab.setFont(new Font("Tahoma", Font.BOLD, 24));
+		t2pointslab.setBounds(260, 0, 170, 100);
+		Team2Panel.add(t2pointslab);
+		
+		JPanel SprintPanel = new JPanel();
+		SprintPanel.setBackground(Color.WHITE);
+		SprintPanel.setBounds(430, 0, 396, 100);
+		game.addComponent(SprintPanel);
+		SprintPanel.setLayout(null);
+		
+		JLabel SprintNumlab = new JLabel("Sprint 3");
+		SprintNumlab.setFont(new Font("Tahoma", Font.BOLD, 24));
+		SprintNumlab.setHorizontalAlignment(SwingConstants.CENTER);
+		SprintNumlab.setBounds(0, 0, 396, 58);
+		SprintPanel.add(SprintNumlab);
+		
+		JLabel TeamInfolab = new JLabel("Team 1");
+		TeamInfolab.setFont(new Font("Tahoma", Font.BOLD, 16));
+		TeamInfolab.setHorizontalAlignment(SwingConstants.CENTER);
+		TeamInfolab.setBounds(0, 63, 396, 37);
+		SprintPanel.add(TeamInfolab);
+		//
 		Deck deck = new Deck();
 		Card card = new Card(50,50);
 		game.addComponent(card);
