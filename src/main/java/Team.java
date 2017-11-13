@@ -12,6 +12,7 @@ public class Team {
     private RollDie rollDie; 
     // private Die rollDie; 
     private boolean win = false;
+    private String Name;
     
     // Takes the game deck as input to the constructor so the team can draw cards
   //  public Team(Deck deck, Dice dice) {
@@ -49,7 +50,22 @@ public class Team {
     public boolean getWin() {
     	return win;
     }
-    
+    public void setName(String n)
+    {
+    	Name=n;
+    }
+    public String getName()
+    {
+    	return Name;
+    }
+    public void setNumber(int n)
+    {
+    	numPlayers=n;
+    }
+    public int getNumber()
+    {
+    	return numPlayers;
+    }
     // Ensures that each team's hand always contains 10 cards and returns the updated hand
     public void drawCards() {
         while (hand.size() < 10) {

@@ -16,7 +16,6 @@ public class Card extends JComponent{
 	//need to add listener
 	//need to add button
 	
-	
     private int value;
     private int storyPoints;
     private int xPos;
@@ -24,17 +23,18 @@ public class Card extends JComponent{
     private Random rand;
     private BufferedImage image;
     private InputStream str;
-    private String imageStr = "BlankCard.jpg";
+    private String imageStr = "card.jpg";
     private int sprint;
     private int team;
+    
     public Card(int x , int y) {
     	this.xPos = x;
     	this.yPos = y;
         rand = new Random();
         // Value is a random number between 1 and 20
         value = rand.nextInt(20) + 1;
-        // Story points is a random number between 1 and 12
-        storyPoints = rand.nextInt(12) + 1;
+        // Story points is a random number between 1 and 20
+        storyPoints = rand.nextInt(20) + 1;
     }
     
     // Decoupled this logic from the constructor
@@ -74,8 +74,11 @@ public class Card extends JComponent{
         setCardImage();
     	
     	//story display strings
-    	String displaySP = "Story Points: " + storyPoints;
-    	String displayVal = "Value: " + value;
+    	// String displaySP = "Story Points: " + storyPoints;
+    	// String displayVal = "Value: " + value;
+        
+        String displaySP = "" + storyPoints;
+    	String displayVal = "" + value;
     	
     	//actually drawing the cards and stuff yo
     	g.setFont(new Font("TimesRoman" , Font.PLAIN,18));
@@ -103,5 +106,6 @@ public class Card extends JComponent{
     }
     public void cardFailed() {
         storyPoints -= 1;
+    
     }
 }
