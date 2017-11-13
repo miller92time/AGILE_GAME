@@ -94,15 +94,9 @@ public class AgileGame implements Runnable {
 		
 	}
 	
-	
-<<<<<<< HEAD
-
-	public void run() {
-=======
 	//
 	private final static JLabel t1lab = new JLabel("<html>Total<br>Value Points</html>");
 	public static void main(String[] args) {
->>>>>>> e0529da7891d3a2512556b6c1f93202cc99e01a6
 
 		//initial dispay stuff
 		AgileGame game = new AgileGame();
@@ -210,6 +204,13 @@ public class AgileGame implements Runnable {
 		}
 		
 
+	}
+
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
