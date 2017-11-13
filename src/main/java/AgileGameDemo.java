@@ -15,12 +15,7 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-<<<<<<< HEAD
-
-public class AgileGameDemo  implements Runnable{
-=======
 public class AgileGameDemo {
->>>>>>> e0529da7891d3a2512556b6c1f93202cc99e01a6
 
 	private JFrame frmAgileGame;
 	private JTextField Team1Name;
@@ -31,16 +26,14 @@ public class AgileGameDemo {
 	/**
 	 * Launch the application.
 	 */
-<<<<<<< HEAD
 
 	public void run() {
 		try {
 			AgileGameDemo window = new AgileGameDemo();
 			window.frmAgileGame.setVisible(true);
 		} catch (Exception e) {
-			e.printStackTrace();
+			e.printStackTrace();}
 		}
-=======
 	public static String team1name="Team one";
 	public static String team2name="Team two";
 	public static int team1player;
@@ -56,7 +49,6 @@ public class AgileGameDemo {
 				}
 			}
 		});
->>>>>>> e0529da7891d3a2512556b6c1f93202cc99e01a6
 	}
 
 	/**
@@ -132,23 +124,13 @@ public class AgileGameDemo {
 		JLabel lblPlayer_1 = new JLabel("Player:");
 		lblPlayer_1.setBounds(21, 104, 69, 20);
 		panelTeam2.add(lblPlayer_1);
-<<<<<<< HEAD
-
-		textField = new JTextField();
-		textField.setText("4");
-		textField.setBounds(129, 101, 146, 26);
-		panelTeam2.add(textField);
-		textField.setColumns(10);
-
-=======
 		
 		Team2Number = new JTextField();
 		Team2Number.setText("4");
 		Team2Number.setBounds(129, 101, 146, 26);
 		panelTeam2.add(Team2Number);
 		Team2Number.setColumns(10);
-		
->>>>>>> e0529da7891d3a2512556b6c1f93202cc99e01a6
+	
 		JButton btnStartGame = new JButton("Start Game");
 		btnStartGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
