@@ -10,7 +10,7 @@ public class AgileGame implements Runnable {
 	final int gameHeight = 1024;
 	static boolean gameStatus;
 	JFrame frame;
-	Dice dice;
+	RollDie rollDie;
 	Deck deck;
 	Team team1;
 	Team team2;
@@ -19,10 +19,10 @@ public class AgileGame implements Runnable {
 		
 		gameStatus = true;
 		frame = new JFrame(gameString);
-		dice = new Dice();
+		rollDie = new RollDie();
         deck = new Deck();
-		team1 = new Team(deck, dice);
-		team2 = new Team(deck, dice);
+		team1 = new Team(deck, rollDie);
+		team2 = new Team(deck, rollDie);
 		team1.setName(AgileGameDemo.team1name);
 		team1.setNumber(AgileGameDemo.team1player);
 		team2.setName(AgileGameDemo.team2name);
@@ -163,7 +163,7 @@ public class AgileGame implements Runnable {
 		card2.setX(500);
 		game.addComponent(card2);
 		game.drawComponents();
-		Die die = new Die(300,300);
+		//Die die = new Die(300,300);
 		
 		
 		game.team1.drawCards();
@@ -173,7 +173,7 @@ public class AgileGame implements Runnable {
 		//need to add button for rolls
 
 
-		game.addComponent(die);
+		//game.addComponent(die);
 		game.drawComponents();
 
 		//game loop
