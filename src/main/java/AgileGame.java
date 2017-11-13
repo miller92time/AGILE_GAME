@@ -9,8 +9,9 @@ public class AgileGame implements Runnable {
 	final int gameWidth = 1280;
 	final int gameHeight = 1024;
 	static boolean gameStatus;
+	
 	JFrame frame;
-	Dice dice;
+	RollDie rollDie;
 	Deck deck;
 	Team team1;
 	Team team2;
@@ -19,10 +20,13 @@ public class AgileGame implements Runnable {
 		
 		gameStatus = true;
 		frame = new JFrame(gameString);
-		dice = new Dice();
+		// dice = new Dice();
         deck = new Deck();
-		team1 = new Team(deck, dice);
-		team2 = new Team(deck, dice);
+        
+        RollDie rollDie = new RollDie();
+        team1 = new Team(deck, rollDie); 
+        team2 = new Team(deck, rollDie); 
+        
 		team1.setName(AgileGameDemo.team1name);
 		team1.setNumber(AgileGameDemo.team1player);
 		team2.setName(AgileGameDemo.team2name);
@@ -50,12 +54,9 @@ public class AgileGame implements Runnable {
 		//game logic here
 		
 		//on click events
-		
-		
+			
 		checkGameOver();
-		
-		
-		
+			
 	}
 	
 	public void checkGameOver() {
@@ -73,11 +74,7 @@ public class AgileGame implements Runnable {
 			//Graphics g = frame.getGraphics();
 			//frame.add(g);
 			gameStatus = false;
-		}
-			
-		
-		
-		
+		}	
 		
 	}
 
@@ -98,9 +95,11 @@ public class AgileGame implements Runnable {
 	private final static JLabel t1lab = new JLabel("<html>Total<br>Value Points</html>");
 	public static void main(String[] args) {
 
-		//initial dispay stuff
+		//Initial Game Display
 		AgileGame game = new AgileGame();
 		game.initializeGUI();
+		
+		// Deck & Cards
 		/**
 		 * Initialize the contents of the frame.
 		 */
@@ -156,24 +155,25 @@ public class AgileGame implements Runnable {
 		//
 		Deck deck = new Deck();
 		Card card = new Card(50,50);
+		
 		game.addComponent(card);
 		game.drawComponents();
+		
 		Card card2 = deck.draw();
 		card2.setY(50);
 		card2.setX(500);
 		game.addComponent(card2);
 		game.drawComponents();
-		Die die = new Die(300,300);
 		
+		// Dice
+		RollDie rollDie = new RollDie(); 
+		game.addComponent(rollDie);
+		game.drawComponents();
 		
+		// Team 
 		game.team1.drawCards();
-		
 
-
-		//need to add button for rolls
-
-
-		game.addComponent(die);
+		//game.addComponent(die); 			// Add some component 
 		game.drawComponents();
 
 		//game loop
@@ -188,7 +188,6 @@ public class AgileGame implements Runnable {
 			 * game.drawComponent();
 			 * (Use calls to drawCard and rollDice)
 			 */
-			
 			
 			game.checkGameStatus();
 			game.drawComponents();
@@ -205,6 +204,7 @@ public class AgileGame implements Runnable {
 		
 
 	}
+	
 
 
 	@Override

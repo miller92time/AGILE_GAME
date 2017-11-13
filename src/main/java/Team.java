@@ -8,14 +8,19 @@ public class Team {
     private int numPlayers;
     private int score;
     private Deck deck;
-    private Dice dice;
+    // private Dice dice;
+    private RollDie rollDie; 
+    // private Die rollDie; 
     private boolean win = false;
     private String Name;
     
     // Takes the game deck as input to the constructor so the team can draw cards
-    public Team(Deck deck, Dice dice) {
+  //  public Team(Deck deck, Dice dice) {
+   public Team(Deck deck, RollDie rollDie) {
+   // public Team(Deck deck, Die rollDie) {
     	this.deck = deck;
-        this.dice = dice;
+        // this.dice = dice;
+    	this.rollDie = rollDie; 
         hand = new ArrayList<Card>();
         numPlayers = 4; // Default is 4, can add ability to change it later
         score = 0;
@@ -84,9 +89,12 @@ public class Team {
     // Takes the card the player chose for their turn and completes their dice roll
     public void playerTurn(Card card) {
         int goal = card.getStoryPoints();
-        int[] diceRoll = dice.rollDice();
-        int result = diceRoll[0] + diceRoll[1];
-        if (result >= goal) {
+        // int diceRoll = dice.rollDice();
+        int diceRollValue = rollDie.rollDice();  
+        // int result = diceRoll;
+        int rollResult = diceRollValue; 
+        // if (result >= goal) {
+        if(rollResult >= goal) {
             hand.remove(card);
             score += card.getValue();
         } else {
