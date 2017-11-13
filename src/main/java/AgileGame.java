@@ -12,8 +12,8 @@ public class AgileGame implements Runnable {
 	JFrame frame;
 	Dice dice;
 	Deck deck;
-	Team team1;
-	Team team2;
+	static Team team1;
+	static Team team2;
 
 	public AgileGame() {
 		
@@ -94,6 +94,8 @@ public class AgileGame implements Runnable {
 		
 	}
 	
+	
+
 	//
 	private final static JLabel t1lab = new JLabel("<html>Total<br>Value Points</html>");
 	public static void main(String[] args) {
@@ -110,14 +112,19 @@ public class AgileGame implements Runnable {
 		game.addComponent(Team1Panel);
 		Team1Panel.setLayout(null);
 		t1lab.setFont(new Font("Tahoma", Font.BOLD, 24));
-		t1lab.setBounds(0, 0, 170, 100);
+		t1lab.setBounds(0, 42, 284, 58);
 		Team1Panel.add(t1lab);
 		
-		JLabel t1pointslab = new JLabel("60");
+		JLabel t1pointslab = new JLabel(String.valueOf(team1.getScore()));
 		t1pointslab.setHorizontalAlignment(SwingConstants.CENTER);
 		t1pointslab.setFont(new Font("Tahoma", Font.BOLD, 24));
 		t1pointslab.setBounds(260, 0, 170, 100);
 		Team1Panel.add(t1pointslab);
+		
+		JLabel t1namelab = new JLabel(team1.getName());
+		t1namelab.setFont(new Font("Tahoma", Font.BOLD, 16));
+		t1namelab.setBounds(0, 0, 170, 36);
+		Team1Panel.add(t1namelab);
 		
 		JPanel Team2Panel = new JPanel();
 		Team2Panel.setBackground(Color.LIGHT_GRAY);
@@ -126,15 +133,21 @@ public class AgileGame implements Runnable {
 		Team2Panel.setLayout(null);
 		
 		JLabel t2lab = new JLabel("<html>Total<br>Value Points</html>");
-		t2lab.setBounds(0, 0, 148, 100);
+		t2lab.setBounds(0, 42, 284, 58);
 		Team2Panel.add(t2lab);
 		t2lab.setFont(new Font("Tahoma", Font.BOLD, 24));
 		
-		JLabel t2pointslab = new JLabel("60");
+		//
+		JLabel t2pointslab = new JLabel(String.valueOf(team2.getScore()));
 		t2pointslab.setHorizontalAlignment(SwingConstants.CENTER);
 		t2pointslab.setFont(new Font("Tahoma", Font.BOLD, 24));
 		t2pointslab.setBounds(260, 0, 170, 100);
 		Team2Panel.add(t2pointslab);
+		
+		JLabel t2namelab = new JLabel(team2.getName());
+		t2namelab.setFont(new Font("Tahoma", Font.BOLD, 16));
+		t2namelab.setBounds(0, 0, 170, 36);
+		Team2Panel.add(t2namelab);
 		
 		JPanel SprintPanel = new JPanel();
 		SprintPanel.setBackground(Color.WHITE);
@@ -148,7 +161,7 @@ public class AgileGame implements Runnable {
 		SprintNumlab.setBounds(0, 0, 396, 58);
 		SprintPanel.add(SprintNumlab);
 		
-		JLabel TeamInfolab = new JLabel("Team 1");
+		JLabel TeamInfolab = new JLabel("Current playing: "+team1.getName());
 		TeamInfolab.setFont(new Font("Tahoma", Font.BOLD, 16));
 		TeamInfolab.setHorizontalAlignment(SwingConstants.CENTER);
 		TeamInfolab.setBounds(0, 63, 396, 37);
@@ -210,7 +223,7 @@ public class AgileGame implements Runnable {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		
+		main(null);
 	}
 
 }
