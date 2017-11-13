@@ -14,27 +14,27 @@ public class GameLogicTest {
     
     private Team team;
     private Deck deck;
-    private Dice dice;
+    private RollDie rollDie;
     private Team winTeam;
     private Team loseTeam;
-    private Dice winDice;
-    private Dice loseDice;
+    private RollDie winDice;
+    private RollDie loseDice;
     
     @Before
     public void setUp() {
         // Team for testing deck and dice
         this.deck = new Deck();
-        this.dice = new Dice();
-        this.team = new Team(this.deck, this.dice);
+        this.rollDie = new RollDie();
+        this.team = new Team(this.deck, this.rollDie);
         
         // Team with mock dice rigged to make every card attempt successful
-        this.winDice = mock(Dice.class);
+        this.winDice = mock(RollDie.class);
         int[] winner = {7,7};
         when(this.winDice.rollDice()).thenReturn(winner);
         this.winTeam = new Team(this.deck, this.winDice);
         
         // Team with mock dice rigged to make every card attempt fail
-        this.loseDice = mock(Dice.class);
+        this.loseDice = mock(RollDie.class);
         int[] loser = {0,0};
         when(this.loseDice.rollDice()).thenReturn(loser);
         this.loseTeam = new Team(this.deck, this.loseDice);
